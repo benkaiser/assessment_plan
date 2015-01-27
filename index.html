@@ -1,49 +1,50 @@
 <html>
 <head>
-  <title>Assessment plan</title>
+  <title>Assessment Timeline</title>
   <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.1/cerulean/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-sortable.css"/>
 </head>
 <body>
 
   <div class="container">
-    <h1>Assessment Plan Sorter</h1>
+    <h1>Assessment Timeline</h1>
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3 well bs-component">
         <div class="">
 
           <form class="form-horizontal">
             <div class="form-group">
-              <label for="unit" class="col-lg-3 control-label">Unit</label>
+              <label for="unit" class="col-lg-3 control-label">Subject</label>
               <div class="col-lg-9">
-                <input type="text" class="form-control" id="unit" placeholder="English and EAL Unit 3">
+                <input type="text" class="form-control" id="unit" placeholder="English">
               </div>
             </div>
 
             <div class="form-group">
-              <label for="assessment" class="col-lg-3 control-label">Assessment</label>
+              <label for="assessment" class="col-lg-3 control-label">Assessment Task</label>
               <div class="col-lg-9">
                 <input type="text" class="form-control" id="assessment" placeholder="January Holiday Homework">
               </div>
             </div>
 
             <div class="form-group">
-              <label for="graded" class="col-lg-3 control-label">Graded or Satisfactory</label>
+              <label for="graded" class="col-lg-3 control-label">Outcome</label>
               <div class="col-lg-9">
                 <input type="text" class="form-control" id="graded" placeholder="G or S">
               </div>
             </div>
 
             <div class="form-group">
-              <label for="week" class="col-lg-3 control-label">Week Number</label>
+              <label for="week" class="col-lg-3 control-label">Week</label>
               <div class="col-lg-9">
                 <input type="number" class="form-control" id="week" placeholder="1">
               </div>
             </div>
 
             <div class="form-group">
-              <label for="date" class="col-lg-3 control-label">Date Info</label>
+              <label for="date" class="col-lg-3 control-label">Date</label>
               <div class="col-lg-9">
-                <input type="text" class="form-control" id="date" placeholder="Wed 4th Feb, 8:45am">
+                <input type="text" class="form-control" id="date" placeholder="4/2/2015">
               </div>
             </div>
 
@@ -79,14 +80,14 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <table class="table table-striped">
+        <table class="table table-striped sortable">
           <thead>
             <tr>
-              <th>Unit</th>
-              <th>Assessment</th>
-              <th>Graded or S</th>
+              <th>Subject</th>
+              <th>Assessment Task</th>
+              <th>Outcome</th>
               <th>Week</th>
-              <th>Date Info</th>
+              <th>Date</th>
               <th>Length of Task</th>
               <th>Conditions</th>
               <th>Effect of Unsatisfactory</th>
@@ -101,6 +102,8 @@
 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="js/bootstrap-sortable.js"></script>
+<script src="js/moment.min.js"></script>
 <script type="text/javascript">
 $("#submit").click(function(){
   // creates the variables and sets them to the input values
@@ -113,7 +116,8 @@ $("#submit").click(function(){
   var conditions = $("#conditions").val();
   var effect = $("#effect").val();
   // inserts the stuff into the table
-  $("#results").append("<tr><td>" + unit + "</td><td>" + assessment + "</td><td>" + graded + "</td><td>" + week + "</td><td>" + date + "</td><td>" + length + "</td><td>" + conditions + "</td><td>" + effect + "</td></tr>");
+  $("#results").append("<tr><td>" + unit + "</td><td>" + assessment + "</td><td>" + graded + "</td><td>" + week + "</td><td data-dateformat='DD/MM/YYYY'>" + date + "</td><td>" + length + "</td><td>" + conditions + "</td><td>" + effect + "</td></tr>");
+  $.bootstrapSortable(true);
   // clears the inputs after the submit button is pressed
   $("#unit").val("");
   $("#assessment").val("");
